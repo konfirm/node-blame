@@ -65,7 +65,7 @@
         "typeof"
     ],
     "requirePaddingNewLinesBeforeLineComments": {
-        "allExcept": "firstAfterCurly, inlineComments"
+        "allExcept": "firstAfterCurly"
     },
     "requirePaddingNewLinesAfterBlocks": true,
     "validateLineBreaks": "LF",
