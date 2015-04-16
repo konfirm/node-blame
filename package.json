@@ -1,6 +1,6 @@
 {
   "name": "blame",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easy stack-traces (and find the file/line(/call) to blame)",
   "main": "lib/blame/index.js",
   "scripts": {
