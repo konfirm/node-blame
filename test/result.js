@@ -147,5 +147,22 @@ lab.experiment('Result Manipulation', function() {
 			done();
 		});
 
+		lab.test('Obtain items', function(done) {
+			var first = result.first(),
+				last = result.last();
+
+			Code.expect(first.item()).to.equal(result.trace[0]);
+			Code.expect(result.item(0)).to.equal(first.trace[0]);
+
+			Code.expect(result.item(3)).to.equal(result.trace[3]);
+
+			Code.expect(last.item(true)).to.equal(result.trace[result.trace.length - 1]);
+
+			Code.expect(last.item(-1)).to.equal(null);
+			Code.expect(last.item(result.trace.length)).to.equal(null);
+
+			done();
+		});
+
 	});
 });
