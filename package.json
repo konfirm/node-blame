@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/konfirm/node-blame",
   "devDependencies": {
-    "lab": "^5.5.1",
-    "code": "^1.4.0"
+    "code": "^1.4.0",
+    "coveralls": "^2.11.2",
+    "lab": "^5.5.1"
   }
 }
