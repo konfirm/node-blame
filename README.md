@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/blame.svg)](http://badge.fury.io/js/blame)
-[![travis ci](https://api.travis-ci.org/konfirm/node-blame.svg)
+[![travis ci](https://api.travis-ci.org/konfirm/node-blame.svg)](https://travis-ci.org/konfirm/node-blame)
 
 # node-blame
 Easy stack traces
