@@ -68,6 +68,12 @@ Create a new `BlameResult` containing only the first N items
 Create a new `BlameResult` containing only the last N items
 - `max` is an _optional_ limit of the number of items in the returned BlameResult
 
+#### `.item` (`ResultItem`)
+Obtain a single item from the `BlameResult` trace.
+The argument may be any valid index of the stack trace `array`, but also:
+- `false`, `null`, `0` (and ommitting) > first item (top stack trace entry)
+- `true` > last item (bottom stack trace entry)
+
 #### `.steps` (`array`)
 This (excluded from enumeration) property contains all the steps taken to have the `.trace`-items, every time one of the `BlameResult` methods are called as new `BlameResult` is created with a new step containing the arguments used to create the new result.
 Each step is in the format:
@@ -75,6 +81,26 @@ Each step is in the format:
 {"<after|from|before|until>": <pattern>, "max": <max>}
 // or
 {"<first|last>: <max>}"}
+```
+
+#### `.toString` (`string`)
+Both `BlameResult` and `BlameItem` now support the `toString` method, the format is slightly more compact than a `new Error().stack` call.
+`BlameResult`
+```
+console.log(String(blame.trace()));
+
+Message: <message>
+	* <file> @<line>:<column>
+	* <call> [<file> @<line>:<column>]
+```
+
+`BlameItem`
+```
+console.log(String(blame.trace().item()));
+
+<file> @<line>:<column>
+or
+<call> [<file> @<line>:<column>]
 ```
 
 ## License
