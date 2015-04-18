@@ -21,6 +21,7 @@ Create a JSON-like structure from a given or created error-stack and wraps it in
 
 
 ### `BlameResult`
+The `BlameResult` contains all of the data found in the error stack and provides several methods to quickly reduce the stack trace, _note that all of these methods work with the obtained stack trace order_, this means that the items are sorted top down, e.g. `first` refers to the first item on the list of items in the stack trace (meaning this was the final call) before the Error was created and/or `blame.trace()` was invoked.
 
 #### `.message` (`string`)
 The message taken from the Error, if no Error was provided to `blame.stack` this will contain an empty string.

@@ -37,6 +37,7 @@ lab.experiment('Result Manipulation', function() {
 			pattern = /labexperiment\.experiment/i,
 			begin, end;
 
+		//  find the first (begin) and last (end) occurence of the pattern (which matches the string as well)
 		result.trace.forEach(function(item, index) {
 			if (!begin)
 				begin = pattern.test(item.call) ? index : null;
@@ -58,6 +59,13 @@ lab.experiment('Result Manipulation', function() {
 
 				done();
 			});
+
+			lab.test('Stringify', function(done) {
+				Code.expect(String(result.after(string, 1).item())).to.not.contain(string);
+				Code.expect(String(result.after(pattern, 1).item())).to.not.match(pattern);
+
+				done();
+			});
 		});
 
 		lab.experiment('From', function() {
@@ -71,6 +79,13 @@ lab.experiment('Result Manipulation', function() {
 			lab.test('RegExp', function(done) {
 				Code.expect(result.from(pattern).trace.length).to.equal(length - begin);
 				Code.expect(result.from(pattern, 1).trace.length).to.equal(1);
+
+				done();
+			});
+
+			lab.test('Stringify', function(done) {
+				Code.expect(String(result.from(string, 1).item())).to.contain(string);
+				Code.expect(String(result.from(pattern, 1).item())).to.match(pattern);
 
 				done();
 			});
@@ -90,6 +105,13 @@ lab.experiment('Result Manipulation', function() {
 
 				done();
 			});
+
+			lab.test('Stringify', function(done) {
+				Code.expect(String(result.before(string, 1).item())).to.not.contain(string);
+				Code.expect(String(result.before(pattern, 1).item())).to.not.match(pattern);
+
+				done();
+			});
 		});
 
 		lab.experiment('Until', function() {
@@ -103,6 +125,13 @@ lab.experiment('Result Manipulation', function() {
 			lab.test('RegExp', function(done) {
 				Code.expect(result.until(pattern).trace.length).to.equal(end + 1);
 				Code.expect(result.until(pattern, 1).trace.length).to.equal(1);
+
+				done();
+			});
+
+			lab.test('Stringify', function(done) {
+				Code.expect(String(result.until(string, 1).item())).to.contain(string);
+				Code.expect(String(result.until(pattern, 1).item())).to.match(pattern);
 
 				done();
 			});
@@ -164,5 +193,36 @@ lab.experiment('Result Manipulation', function() {
 			done();
 		});
 
+		lab.experiment('toString', function() {
+			lab.test('Result', function(done) {
+				//  expectation = <tab><asterisk>LabExperiment.experiment ... [... @<num>:<num>]
+				var output = String(result.from(string).until(string)).split(/\n+/),
+					expectation = new RegExp('\t\* ' + string + '.*?\[.*? @[0-9]+:[0-9]+\]');
+
+				//  as each result reduction will actually leave the Message intact, we need to validate it first
+				//  (and remove it from the mass-expectation below)
+				Code.expect(output.shift()).to.equal('Message: ');
+
+				//  test each remaing line (28)
+				Code.expect(output.length).to.equal(28);
+				output.forEach(function(line) {
+					Code.expect(line).to.match(expectation);
+				});
+
+				done();
+			});
+
+			lab.test('Item', function(done) {
+				//  we expect a 'non-call' item
+				//  start with '/' and end with ' @<num>:<num>' (e.g. not a call and using our format)
+				Code.expect(String(result.item())).to.match(/^\/.*? @[0-9]+:[0-9]+$/i);
+
+				//  we expect a 'call' item
+				//  start with the specified call (the string variant)
+				Code.expect(String(result.until(pattern).item(true))).to.match(new RegExp('^' + string + '.*?\s+\[\/.*? @[0-9]+:[0-9]+\]$'));
+
+				done();
+			});
+		});
 	});
 });
