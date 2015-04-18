@@ -4,7 +4,8 @@
   "description": "Easy stack-traces (and find the file/line(/call) to blame)",
   "main": "lib/blame/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/lab -f -t 100 -m 3000",
+    "test-coverage": "./node_modules/.bin/lab -f -r html -m 3000 -o report.html"
   },
   "repository": {
     "type": "git",
