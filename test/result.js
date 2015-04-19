@@ -209,17 +209,19 @@ lab.experiment('Result Manipulation', function() {
 					Code.expect(line).to.match(expectation);
 				});
 
+				Code.expect(result.toString('void')).to.equal('void');
+
 				done();
 			});
 
 			lab.test('Item', function(done) {
 				//  we expect a 'non-call' item
 				//  start with '/' and end with ' @<num>:<num>' (e.g. not a call and using our format)
-				Code.expect(String(result.item())).to.match(/^\/.*? @[0-9]+:[0-9]+$/i);
+				Code.expect(String(result.item())).to.match(/^\s*\/.*? @[0-9]+:[0-9]+$/i);
 
 				//  we expect a 'call' item
 				//  start with the specified call (the string variant)
-				Code.expect(String(result.until(pattern).item(true))).to.match(new RegExp('^' + string + '.*?\s+\[\/.*? @[0-9]+:[0-9]+\]$'));
+				Code.expect(String(result.until(pattern).item(true))).to.match(new RegExp('^\\s*' + string + '.*?\s+\[\/.*? @[0-9]+:[0-9]+\]$'));
 
 				done();
 			});
