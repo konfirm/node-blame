@@ -89,6 +89,7 @@ Each step is in the format:
 
 #### `.toString` (`string`)
 Both `BlameResult` and `BlameItem` now support the `toString` method, the format is slightly more compact than a `new Error().stack` call.
+
 `BlameResult`
 ```
 console.log(String(blame.trace()));
