@@ -102,10 +102,15 @@ Message: <message>
 ```
 console.log(String(blame.trace().item()));
 
-<file> @<line>:<column>
+<message>
+	<file> @<line>:<column>
 or
-<call> [<file> @<line>:<column>]
+<message>
+	<call> [<file> @<line>:<column>]
 ```
+
+As of version 1.3.0 a template may be provided to the respective `toString` methods, this allows for different (and even colored) output. Please see the [examples](example/).
+
 
 ## License
 GPLv2 © [Konfirm](https://konfirm.eu)
