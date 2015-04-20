@@ -25,12 +25,12 @@ var blame = require('blame'),
 	trace = blame.trace('Hello world'),
 	item = trace.item();
 
-console.log(item.toString('{message}\n\t{@call:{call} [@}{file}:{line}:{column}{@call:]}'));
+console.log(item.toString('{message}\n\t#{index} {@call:{call} [@}{file}:{line}:{column}{@call:]}'));
 ```
 This example will print something like the following to the console:
 ```
 Hello world
-	/path/to/file.js:43:21
+	#1 /path/to/file.js:43:21
 ```
 
 ### Subtemplates
@@ -60,6 +60,7 @@ BlameResult objects (obtained via `blame.trace()`), have the follwing variables 
 ### `BlameItem`
 BlameItem objects (a single item in the trace, for example obtained via `blame.trace().item()`) have the following variables available:
 - `message` - The Error/Blame message (e.g. `'Message: {message}'`), *note* that this is the exact same message as provided by `BlameResult`
+- `index` - The position of the item in the *original* stack trace, *note* that `index` does not change when the trace set is reduced
 - `call` - The function/method of the item in the stack (e.g. `'{call}'`, *note* that `call` may be `null` and as such will be replaced with an empty value (tip: use the conditionals to render `{call}`)
 - `file` - The filename of the item in the stack (e.g. `'{file}'`)
 - `line` - The filename of the item in the stack (e.g. `'{line}'`)
@@ -76,7 +77,7 @@ var blame = require('blame'),
 	template = [
 		'{@message:Message: ',
 		'{message}'.red, '@}',
-		'{%trace:\n\t* {@call:',
+		'{%trace:\n\t* {index}{@call:',
 		'{call}'.yellow, ' [@}',
 		'{file}'.cyan,
 		' @{line}:{column}{@call:]@}%}'
