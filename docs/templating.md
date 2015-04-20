@@ -25,7 +25,7 @@ var blame = require('blame'),
 	trace = blame.trace('Hello world'),
 	item = trace.item();
 
-console.log(item.toString('{message}\n\t#{index} {@call:{call} [@}{file}:{line}:{column}{@call:]}'));
+console.log(item.toString('{message}\n\t#{index} {@call:{call} [@}{file}:{line}:{column}{@call:]@}'));
 ```
 This example will print something like the following to the console:
 ```
@@ -41,7 +41,7 @@ The syntax is `{%<variable>:<content>%}`
 var blame = require('blame'),
 	trace = blame.trace('Hello world');
 
-console.log(trace.toString('Error: {message}{%trace:\n\t-{@call:{call} [@}{file}:{line}:{column}{@call:]}%}'));
+console.log(trace.toString('Error: {message}{%trace:\n\tat {@call:{call} [@}{file}:{line}:{column}{@call:]@}%}'));
 ```
 This example will print a very familiar format (pretty much like the normal Error stack trace), for example:
 ```
