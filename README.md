@@ -37,6 +37,9 @@ The `BlameResult` contains all of the data found in the error stack and provides
 The message taken from the Error, if no Error was provided to `blame.stack` this will contain an empty string.
 
 #### `.trace` (`array`)
+As of version 1.5.0 The `trace` method is deprecated (you'll receive a proper notice for this), please use the `.stack` method.
+
+#### `.stack` (`array`)
 The stack-trace of the error/backtrace, the format is:
 ```json
 [{

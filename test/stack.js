@@ -30,17 +30,17 @@ lab.experiment('Stacked', function() {
 		var experiment = new LabExperiment();
 
 		experiment.first(function() {
-			var result = blame.trace();
+			var result = blame.stack();
 
 			//  there should be an empty string as message
 			Code.expect(result.message).to.equal('');
 
 			callList.forEach(function(name, index) {
 				//  the item should refer to the current file
-				Code.expect(result.trace[index].file).to.equal(module.filename);
+				Code.expect(result.stack[index].file).to.equal(module.filename);
 
 				//  call should be null
-				Code.expect(result.trace[index].call).to.equal(name);
+				Code.expect(result.stack[index].call).to.equal(name);
 			});
 
 			done();
@@ -51,17 +51,17 @@ lab.experiment('Stacked', function() {
 		var experiment = new LabExperiment();
 
 		experiment.first(function() {
-			var result = blame.trace('String Invocation');
+			var result = blame.stack('String Invocation');
 
 			//  the result message should read 'String Invocation'
 			Code.expect(result.message).to.equal('String Invocation');
 
 			callList.forEach(function(name, index) {
 				//  the item should refer to the current file
-				Code.expect(result.trace[index].file).to.equal(module.filename);
+				Code.expect(result.stack[index].file).to.equal(module.filename);
 
 				//  call should be null
-				Code.expect(result.trace[index].call).to.equal(name);
+				Code.expect(result.stack[index].call).to.equal(name);
 			});
 
 			done();
@@ -72,17 +72,17 @@ lab.experiment('Stacked', function() {
 		var experiment = new LabExperiment();
 
 		experiment.first(function() {
-			var result = blame.trace(new Error('Error Invocation'));
+			var result = blame.stack(new Error('Error Invocation'));
 
 			//  the result message should read 'Error Invocation'
 			Code.expect(result.message).to.equal('Error Invocation');
 
 			callList.forEach(function(name, index) {
 				//  the item should refer to the current file
-				Code.expect(result.trace[index].file).to.equal(module.filename);
+				Code.expect(result.stack[index].file).to.equal(module.filename);
 
 				//  call should be null
-				Code.expect(result.trace[index].call).to.equal(name);
+				Code.expect(result.stack[index].call).to.equal(name);
 			});
 
 			done();
@@ -93,17 +93,17 @@ lab.experiment('Stacked', function() {
 		var experiment = new LabExperiment();
 
 		experiment.first(function() {
-			var result = blame.trace(true);
+			var result = blame.stack(true);
 
 			//  the result message should read 'true' (a string)
 			Code.expect(result.message).to.equal('true');
 
 			callList.forEach(function(name, index) {
 				//  the item should refer to the current file
-				Code.expect(result.trace[index].file).to.equal(module.filename);
+				Code.expect(result.stack[index].file).to.equal(module.filename);
 
 				//  call should be null
-				Code.expect(result.trace[index].call).to.equal(name);
+				Code.expect(result.stack[index].call).to.equal(name);
 			});
 
 			done();
@@ -114,17 +114,17 @@ lab.experiment('Stacked', function() {
 		var experiment = new LabExperiment();
 
 		experiment.first(function() {
-			var result = blame.trace(1000);
+			var result = blame.stack(1000);
 
 			//  the result message should read '1000' (a string)
 			Code.expect(result.message).to.equal('1000');
 
 			callList.forEach(function(name, index) {
 				//  the item should refer to the current file
-				Code.expect(result.trace[index].file).to.equal(module.filename);
+				Code.expect(result.stack[index].file).to.equal(module.filename);
 
 				//  call should be null
-				Code.expect(result.trace[index].call).to.equal(name);
+				Code.expect(result.stack[index].call).to.equal(name);
 			});
 
 			done();
