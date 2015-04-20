@@ -83,7 +83,7 @@ Create a new `BlameResult` containing only the first N items
 Create a new `BlameResult` containing only the last N items
 - `max` is an _optional_ limit of the number of items in the returned BlameResult
 
-#### `.item` (`ResultItem`)
+#### `.item([index])` (`ResultItem`)
 Obtain a single item from the `BlameResult` trace.
 The argument may be any valid index of the stack trace `array`, but also:
 - `false`, `null`, `0` (and ommitting) > first item (top stack trace entry)
