@@ -45,6 +45,29 @@ lab.experiment('Result Manipulation', function() {
 				end = index;
 		});
 
+		lab.experiment('Filter', function() {
+			lab.test('String', function(done) {
+				Code.expect(result.filter(string).trace.length).to.equal(28);
+				Code.expect(result.filter(string, 1).trace.length).to.equal(1);
+
+				done();
+			});
+
+			lab.test('RegExp', function(done) {
+				Code.expect(result.filter(pattern).trace.length).to.equal(28);
+				Code.expect(result.filter(pattern, 1).trace.length).to.equal(1);
+
+				done();
+			});
+
+			lab.test('Stringify', function(done) {
+				Code.expect(String(result.filter(string, 1).item())).to.contain(string);
+				Code.expect(String(result.filter(pattern, 1).item())).to.match(pattern);
+
+				done();
+			});
+		});
+
 		lab.experiment('After', function() {
 			lab.test('String', function(done) {
 				Code.expect(result.after(string).trace.length).to.equal(length - (end + 1));

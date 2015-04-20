@@ -19,6 +19,12 @@ var blame = require('blame'),
 //  stack contains the full stack-trace leading up to the invocation of `blame.stack()`
 ```
 
+### `Error.stackTraceLimit`
+By default there is a 10 line cap on the stack traces within node.js and io.js, `Blame` does not meddle with this setting by itself as it is widely considered a good default setting (and it truly is).
+If you feel this is getting in the way of your debugging/reporting, feel free to set the limit to your liking, for example `Error.stackTraceLimit = Infinity` will never cap the stack trace.
+
+**Note** that changing this setting has to be done very early on in your application.
+
 ## API
 ### `blame.stack([Error])`
 Create a JSON-like structure from a given or created error-stack and wraps it inside a `BlameResult` object.
@@ -44,24 +50,29 @@ The stack-trace of the error/backtrace, the format is:
 ```
 (`call` may be null if the trace was not called from within a function scope)
 
+#### `.filter(pattern [, max])` (`BlameResult`)
+Create a new `BlameResult` containing only the items which match given pattern
+- `pattern` must be one of: `string`, `RegExp` (will be cast to `RegExp` if it is not)
+- `max` is an _optional_ limit of the number of items in the returned BlameResult
+
 #### `.after(pattern [, max])` (`BlameResult`)
 Create a new `BlameResult` containing only the items after given pattern (like `from` but *excluding* the match(es)).
-- `pattern` must be one of: `string`, `RegExp` (will be case to `RegExp` if it is not)
+- `pattern` must be one of: `string`, `RegExp` (will be cast to `RegExp` if it is not)
 - `max` is an _optional_ limit of the number of items in the returned BlameResult
 
 #### `.from(pattern [, max])` (`BlameResult`)
 Create a new `BlameResult` containing only the items from given pattern (like `after` but *including* the match(es)).
-- `pattern` must be one of: `string`, `RegExp` (will be case to `RegExp` if it is not)
+- `pattern` must be one of: `string`, `RegExp` (will be cast to `RegExp` if it is not)
 - `max` is an _optional_ limit of the number of items in the returned BlameResult
 
 #### `.before(pattern [, max])` (`BlameResult`)
 Create a new `BlameResult` containing only the items before given pattern (like `until` but *excluding* the match(es)).
-- `pattern` must be one of: `string`, `RegExp` (will be case to `RegExp` if it is not)
+- `pattern` must be one of: `string`, `RegExp` (will be cast to `RegExp` if it is not)
 - `max` is an _optional_ limit of the number of items in the returned BlameResult
 
 #### `.until(pattern [, max])` (`BlameResult`)
 Create a new `BlameResult` containing only the items until given pattern (like `before` but *including* the match(es)).
-- `pattern` must be one of: `string`, `RegExp` (will be case to `RegExp` if it is not)
+- `pattern` must be one of: `string`, `RegExp` (will be cast to `RegExp` if it is not)
 - `max` is an _optional_ limit of the number of items in the returned BlameResult
 
 #### `.first([max])` (`BlameResult`)
