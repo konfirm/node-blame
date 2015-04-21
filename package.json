@@ -1,6 +1,6 @@
 {
   "name": "blame",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Easy stack-traces (and find the file/line(/call) to blame)",
   "main": "lib/blame/index.js",
   "scripts": {
@@ -27,6 +27,8 @@
     "code": "^1.4.0",
     "coveralls": "^2.11.2",
     "lab": "^5.5.1"
-},
-  "engines" : { "node" : ">=0.10" }
+  },
+  "engines": {
+    "node": ">=0.10"
+  }
 }
