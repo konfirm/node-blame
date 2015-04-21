@@ -27,14 +27,7 @@
     "disallowYodaConditions": true,
     "disallowKeywords": [ "with", "eval", "do" ],
     "disallowMultipleLineBreaks": true,
-    "disallowCurlyBraces": [
-        "if",
-        "else",
-        "while",
-        "for",
-        "do",
-        "with"
-    ],
+    "disallowCurlyBraces": [],
     "requireSpaceBeforeBlockStatements": true,
     "requireParenthesesAroundIIFE": true,
     "requireSpacesInConditionalExpression": true,

@@ -1,6 +1,7 @@
 [![npm version](https://badge.fury.io/js/blame.svg)](http://badge.fury.io/js/blame)
 [![travis ci](https://api.travis-ci.org/konfirm/node-blame.svg)](https://travis-ci.org/konfirm/node-blame)
 [![Coverage Status](https://coveralls.io/repos/konfirm/node-blame/badge.svg)](https://coveralls.io/r/konfirm/node-blame)
+[![Codacy Badge](https://www.codacy.com/project/badge/a5861841f2ad4b70af6e72273f08064c)](https://www.codacy.com/app/rogier/node-blame)
 
 # node-blame
 Easy stack traces

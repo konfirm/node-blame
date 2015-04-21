@@ -18,7 +18,7 @@ var blame = require('../lib/blame'),  //  you'd use require('blame')
 */
 
 //  If you'd like to color the template:
-template = '{@message:Message: ' + '{message}'.red + '@}{%stack:\n\t* {@call:' + '{call}'.yellow + ' [@}' + '{file}'.cyan + ' @{line}:{column}{@call:]@}%}';
+template = '{@message:Message: ' + colors.red('{message}') + '@}{%stack:\n\t* {@call:' + colors.yellow('{call}') + ' [@}' + colors.cyan('{file}') + ' @{line}:{column}{@call:]@}%}';
 console.log(stack.toString(template));
 /* (some imagination required for this "colorized" comment)
 Message: Hello world
@@ -42,7 +42,7 @@ Object.Module._extensions..js [module.js @474:10]
 */
 
 //  or, the same style but colored
-template = '{%stack:\n{@call:' + '{call}'.green + ' [@}' + '{file}'.yellow + ' @' + '{line}'.cyan + ':' + '{column}'.blue + '{@call:]@}%}';
+template = '{%stack:\n{@call:' + colors.green('{call}') + ' [@}' + colors.yellow('{file}') + ' @' + colors.cyan('{line}') + ':' + '{column}'.blue + '{@call:]@}%}';
 console.log(stack.first(3).toString(template));
 /* (some imagination required for this "colorized" comment)
 Object.<anonymous> [/path/to/example/template.js @3:16]

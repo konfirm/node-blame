@@ -2,7 +2,6 @@
 
 var Code = require('code'),
 	Lab = require('lab'),
-	fs = require('fs'),
 	blame = require('../lib/blame'),
 	lab = exports.lab = Lab.script();
 

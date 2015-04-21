@@ -2,7 +2,6 @@
 
 var Code = require('code'),
 	Lab = require('lab'),
-	fs = require('fs'),
 	blame = require('../lib/blame'),
 	lab = exports.lab = Lab.script();
 
@@ -27,6 +26,10 @@ function LabExperiment() {
 	};
 }
 
+function lineNumber(value) {
+	return /^[0-9]+ \|/.test(value);
+}
+
 lab.experiment('Result Manipulation', function() {
 	var experiment = new LabExperiment();
 
@@ -39,10 +42,12 @@ lab.experiment('Result Manipulation', function() {
 
 		//  find the first (begin) and last (end) occurence of the pattern (which matches the string as well)
 		result.stack.forEach(function(item, index) {
-			if (!begin)
+			if (!begin) {
 				begin = pattern.test(item.call) ? index : null;
-			else if (pattern.test(item.call))
+			}
+			else if (pattern.test(item.call)) {
 				end = index;
+			}
 		});
 
 		lab.experiment('Filter', function() {
@@ -190,8 +195,9 @@ lab.experiment('Result Manipulation', function() {
 				exist = false;
 
 			still.stack.forEach(function(item) {
-				if (item.call && item.call.indexOf('anonymous') >= 0)
+				if (item.call && item.call.indexOf('anonymous') >= 0) {
 					exist = true;
+				}
 			});
 
 			Code.expect(exist).to.equal(true);
@@ -297,14 +303,13 @@ lab.experiment('Result Manipulation', function() {
 					Code.expect(item.context()).to.equal(item.context(3, 3));
 
 					//  checking the amount of lines in the source excerpt
-					for (after = 10; after > 0; --after)
+					for (after = 10; after > 0; --after) {
 						for (before = 10; before > 0; --before) {
-							lines = item.context(before, after).split('\n').filter(function(value) {
-								return /^[0-9]+ \|/.test(value);
-							});
+							lines = item.context(before, after).split('\n').filter(lineNumber);
 
 							Code.expect(lines.length).to.equal(before + after + 1);
 						}
+					}
 
 					done();
 				});
