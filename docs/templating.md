@@ -51,6 +51,9 @@ Error: Hello world
 	- etc..
 ```
 
+If you ever need to use subtemplates within subtemplate (for example [when using context lines](#lines)) you need to indicate it being a nested subtemplate by using a syntax like `{!%...%!}`, the exclamation marks help us to keep the pattern matching within the template function to a minimum and helps to indicate something special is happening in the template.
+(For those of you who recognize the `!` trick, yes we did the same thing for the original template engine in Konsolidate - our PHP framework)
+
 ## Available variables
 ### `BlameResult`
 BlameResult objects (obtained via `blame.trace()`), have the follwing variables available for use in templates:
@@ -63,9 +66,32 @@ BlameItem objects (a single item in the trace, for example obtained via `blame.t
 - `index` - The position of the item in the *original* stack trace, *note* that `index` does not change when the trace set is reduced
 - `call` - The function/method of the item in the stack (e.g. `'{call}'`, *note* that `call` may be `null` and as such will be replaced with an empty value (tip: use the conditionals to render `{call}`)
 - `file` - The filename of the item in the stack (e.g. `'{file}'`)
+- `short` - The filename with the process' current working directory removed (e.g. `'{short}'`)
 - `line` - The filename of the item in the stack (e.g. `'{line}'`)
 - `column` - The filename of the item in the stack (e.g. `'{column}'`)
 - `context` - An excerpt from the source code responsible for the invocation of the stack item (e.g. `'{context}'`)
+
+#### `context`
+Context by itself also uses a template, even though it was not originally intended to be included in a template you can still specify one. This does - however - require a wee bit more or your wit to implement, because in order to keep our mini-template really simple _and_ still prevent greedy pattern matching, you need to tell the template you will be using a substructure.
+
+If you want to include the `context` in your output, you would use the `'{context}'` placeholder, but this will give you the default output, when you want to have a bit more control, you need to specify a subtemplate, in order to use this you would first need to know which variables are available inside the `context`, these are:
+- `file` - The filename from which the context is show (e.g. `'{file}'`)
+- `short` - The short filename from which the context is show (e.g. `'{short}'`)
+- `start` - The starting linenumber of the context is show (e.g. `'{start}'`)
+- `end` - The ending linenumber of the context is show (e.g. `'{end}'`)
+- `lines` - An array containing the individual lines of source code and their line numbers
+
+##### `lines`
+Lines is where it may get a wee bit more complicated, as each line is represented by an object you'd want to iterate over this array using a subtemplate, but in order to define this subtemplate you'd need to define a subtemplate within a subtemplate using the `{%...%}`-syntax, this would add a level of complexity to the simple template engine we do not want.
+We added `!` to ensure the matching is as easy a possible, so if you need a subtemplate within a subtemplate you use a syntax like: `{!%...%!}`, for example:
+```js
+var template = 'message: {message}\ncall: {call}\ncontext: {%context:{file}:{start}-{end})\n{!%lines:\n{line}  {source}%!}%}';
+```
+
+Here you can see the `{!%lines:\n{line}  {source}%!}` being a part of the `{%context:...%}`-subtemplate.
+That leaves us with telling about the available variables withing the `context.lines` array:
+- `line` - the line number (e.g. `'{line}'`)
+- `source` - the actual source (e.g. `'{source}'`)
 
 
 ## Tips and tricks

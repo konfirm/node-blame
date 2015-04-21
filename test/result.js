@@ -261,7 +261,7 @@ lab.experiment('Result Manipulation', function() {
 				done();
 			});
 
-			lab.test('Item', function(done) {
+			lab.test('Item - simple template', function(done) {
 				var template = '{@call:{call} [@}{file} @{line}:{column}{@call:]@}\n{context}',
 					output = result.item().toString(template);
 
@@ -271,11 +271,34 @@ lab.experiment('Result Manipulation', function() {
 				done();
 			});
 
-			lab.test('Direct invocation', function(done) {
-				var item = result.item();
+			lab.test('Item - complex template', function(done) {
+				var template = '{@call:{call} [@}{file} @{line}:{column}{@call:]@}\n{%context:{file}:{start}-{end})\n{!%lines:\n{line}  {source}%!}%}',
+					output = result.item().toString(template);
 
+				Code.expect(output).to.match(/var result = blame\.stack\(\),/);
+				Code.expect(output).to.match(/\s+\^/);
+				Code.expect(output).not.to.match(/\|/);
+
+				done();
+			});
+
+			lab.test('Direct invocation', function(done) {
+				var item = result.item(),
+					lines, before, after;
+
+				//  checking the default values
 				Code.expect(item.context()).to.equal(item.context(3));
 				Code.expect(item.context()).to.equal(item.context(3, 3));
+
+				//  checking the amount of lines in the source excerpt
+				for (after = 10; after > 0; --after)
+					for (before = 10; before > 0; --before) {
+						lines = item.context(before, after).split('\n').filter(function(value) {
+							return /^[0-9]+ \|/.test(value);
+						});
+
+						Code.expect(lines.length).to.equal(before + after + 1);
+					}
 
 				done();
 			});

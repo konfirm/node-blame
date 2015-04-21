@@ -131,6 +131,8 @@ Provide a excerpt from the file with a simple pointer to the line which was resp
 - if `before` is ommited or its numeric value resolves as `false`-ish, it will default to 3
 - if `after` is ommited or its numeric value resolves as `false`-ish, it will default to the numeric value of `before` or else 3
 
+(Yes, this does mean that there is a minimum of 3 lines total)
+
 
 ## License
 GPLv2 © [Konfirm](https://konfirm.eu)
