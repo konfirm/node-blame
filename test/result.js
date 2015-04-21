@@ -249,5 +249,36 @@ lab.experiment('Result Manipulation', function() {
 				done();
 			});
 		});
+
+		lab.experiment('Context', function() {
+			lab.test('Result', function(done) {
+				var template = '{@message:Message: {message}@}{%trace:\n{@call:{call} [@}{file} @{line}:{column}{@call:]@}\n{context}\n%}',
+				output = result.filter('LabExperiment.experiment.start').toString(template);
+
+				Code.expect(output).to.match(/return experiment\.a\(callback\);/);
+				Code.expect(output).to.match(/\s+\^/);
+
+				done();
+			});
+
+			lab.test('Item', function(done) {
+				var template = '{@call:{call} [@}{file} @{line}:{column}{@call:]@}\n{context}',
+					output = result.item().toString(template);
+
+				Code.expect(output).to.match(/var result = blame\.trace\(\),/);
+				Code.expect(output).to.match(/\s+\^/);
+
+				done();
+			});
+
+			lab.test('Direct invocation', function(done) {
+				var item = result.item();
+
+				Code.expect(item.context()).to.equal(item.context(3));
+				Code.expect(item.context()).to.equal(item.context(3, 3));
+
+				done();
+			});
+		});
 	});
 });

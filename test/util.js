@@ -24,6 +24,15 @@ lab.experiment('Util', function() {
 			done();
 		});
 
+		lab.test('repeater', function(done) {
+			Code.expect(util.template('{#-:3#}')).to.equal('---');
+			Code.expect(util.template('{#-:2#}')).to.equal('--');
+			Code.expect(util.template('{#-:1#}')).to.equal('-');
+			Code.expect(util.template('{#-:#}')).to.equal('-');
+
+			done();
+		});
+
 		lab.test('conditional', function(done) {
 			Code.expect(util.template('{@foo:bar@}', {})).to.equal('');
 			Code.expect(util.template('{@foo:bar@}', {foo: null})).to.equal('');

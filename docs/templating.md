@@ -65,6 +65,7 @@ BlameItem objects (a single item in the trace, for example obtained via `blame.t
 - `file` - The filename of the item in the stack (e.g. `'{file}'`)
 - `line` - The filename of the item in the stack (e.g. `'{line}'`)
 - `column` - The filename of the item in the stack (e.g. `'{column}'`)
+- `context` - An excerpt from the source code responsible for the invocation of the stack item (e.g. `'{context}'`)
 
 
 ## Tips and tricks

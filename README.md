@@ -121,7 +121,12 @@ or
 	<call> [<file> @<line>:<column>]
 ```
 
-As of version 1.3.0 a template may be provided to the respective `toString` methods, this allows for different (and even colored) output. Please see the [examples](example/) or the [documentation on templating](docs/templating.md).
+
+### `BlameItem`
+#### `.context([before [, after]])` (`string`)
+Provide a excerpt from the file with a simple pointer to the line which was responsible for the invocation of the stack item
+- if `before` is ommited or its numeric value resolves as `false`-ish, it will default to 3
+- if `after` is ommited or its numeric value resolves as `false`-ish, it will default to the numeric value of `before` or else 3
 
 
 ## License
