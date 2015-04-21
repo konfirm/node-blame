@@ -6,7 +6,7 @@ var blame = require('../lib/blame'),  //  you'd use require('blame')
 
 //  register a listener for errors
 isolated.on('error', function(error) {
-	console.log('' + blame.trace(error).first(4));
+	console.log('' + blame.stack(error).first(4));
 
 	/*
 	Message: Oops!

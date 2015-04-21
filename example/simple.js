@@ -1,8 +1,8 @@
 var blame = require('../lib/blame'),  //  you'd use require('blame')
-	trace = blame.trace('Hello world');
+	stack = blame.stack('Hello world');
 
 //  the full trace, from the line which triggered the blame.trace to the end of the call stack
-console.log('' + trace);
+console.log('' + stack);
 /*
 Message: Hello world
 	* Object.<anonymous> [/path/to/example/simple.js @2:16]
@@ -17,14 +17,14 @@ Message: Hello world
 
 
 //  only the line which triggered the blame.trace
-console.log('' + trace.first());
+console.log('' + stack.first());
 /*
 Message: Hello world
 	* Object.<anonymous> [/path/to/example/simple.js @2:16]
 */
 
 //  like above but now with a reduced stack trace
-console.log('' + trace.first(2));
+console.log('' + stack.first(2));
 /*
 Message: Hello world
 	* Object.<anonymous> [/path/to/example/simple.js @2:16]
