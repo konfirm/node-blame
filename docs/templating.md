@@ -63,7 +63,8 @@ BlameResult objects (obtained via `blame.trace()`), have the follwing variables 
 ### `BlameItem`
 BlameItem objects (a single item in the trace, for example obtained via `blame.trace().item()`) have the following variables available:
 - `message` - The Error/Blame message (e.g. `'Message: {message}'`), *note* that this is the exact same message as provided by `BlameResult`
-- `index` - The position of the item in the *original* stack trace, *note* that `index` does not change when the trace set is reduced
+- `index` - The position of the item in the *original* stack trace, *note* that `index` does not change when the stack is reduced
+- `order` - The position in the order of the chronological call stack of the item, *note* that `order` does not change when the stack is reduced
 - `call` - The function/method of the item in the stack (e.g. `'{call}'`, *note* that `call` may be `null` and as such will be replaced with an empty value (tip: use the conditionals to render `{call}`)
 - `file` - The filename of the item in the stack (e.g. `'{file}'`)
 - `short` - The filename with the process' current working directory removed (e.g. `'{short}'`)
