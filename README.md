@@ -37,6 +37,9 @@ The `BlameResult` contains all of the data found in the error stack and provides
 The message taken from the Error, if no Error was provided to `blame.stack` this will contain an empty string.
 
 #### `.trace` (`array`)
+As of version 1.5.0 The `trace` method is deprecated (you'll receive a proper notice for this), please use the `.stack` method.
+
+#### `.stack` (`array`)
 The stack-trace of the error/backtrace, the format is:
 ```json
 [{
@@ -83,7 +86,7 @@ Create a new `BlameResult` containing only the first N items
 Create a new `BlameResult` containing only the last N items
 - `max` is an _optional_ limit of the number of items in the returned BlameResult
 
-#### `.item` (`ResultItem`)
+#### `.item([index])` (`ResultItem`)
 Obtain a single item from the `BlameResult` trace.
 The argument may be any valid index of the stack trace `array`, but also:
 - `false`, `null`, `0` (and ommitting) > first item (top stack trace entry)

@@ -31,14 +31,14 @@ lab.experiment('Result Manipulation', function() {
 	var experiment = new LabExperiment();
 
 	experiment.start(function() {
-		var result = blame.trace(),
-			length = result.trace.length,
+		var result = blame.stack(),
+			length = result.stack.length,
 			string = 'LabExperiment.experiment',
 			pattern = /labexperiment\.experiment/i,
 			begin, end;
 
 		//  find the first (begin) and last (end) occurence of the pattern (which matches the string as well)
-		result.trace.forEach(function(item, index) {
+		result.stack.forEach(function(item, index) {
 			if (!begin)
 				begin = pattern.test(item.call) ? index : null;
 			else if (pattern.test(item.call))
@@ -47,15 +47,15 @@ lab.experiment('Result Manipulation', function() {
 
 		lab.experiment('Filter', function() {
 			lab.test('String', function(done) {
-				Code.expect(result.filter(string).trace.length).to.equal(28);
-				Code.expect(result.filter(string, 1).trace.length).to.equal(1);
+				Code.expect(result.filter(string).stack.length).to.equal(28);
+				Code.expect(result.filter(string, 1).stack.length).to.equal(1);
 
 				done();
 			});
 
 			lab.test('RegExp', function(done) {
-				Code.expect(result.filter(pattern).trace.length).to.equal(28);
-				Code.expect(result.filter(pattern, 1).trace.length).to.equal(1);
+				Code.expect(result.filter(pattern).stack.length).to.equal(28);
+				Code.expect(result.filter(pattern, 1).stack.length).to.equal(1);
 
 				done();
 			});
@@ -70,15 +70,15 @@ lab.experiment('Result Manipulation', function() {
 
 		lab.experiment('After', function() {
 			lab.test('String', function(done) {
-				Code.expect(result.after(string).trace.length).to.equal(length - (end + 1));
-				Code.expect(result.after(string, 1).trace.length).to.equal(1);
+				Code.expect(result.after(string).stack.length).to.equal(length - (end + 1));
+				Code.expect(result.after(string, 1).stack.length).to.equal(1);
 
 				done();
 			});
 
 			lab.test('RegExp', function(done) {
-				Code.expect(result.after(pattern).trace.length).to.equal(length - (end + 1));
-				Code.expect(result.after(pattern, 1).trace.length).to.equal(1);
+				Code.expect(result.after(pattern).stack.length).to.equal(length - (end + 1));
+				Code.expect(result.after(pattern, 1).stack.length).to.equal(1);
 
 				done();
 			});
@@ -93,15 +93,15 @@ lab.experiment('Result Manipulation', function() {
 
 		lab.experiment('From', function() {
 			lab.test('String', function(done) {
-				Code.expect(result.from(string).trace.length).to.equal(length - begin);
-				Code.expect(result.from(string, 1).trace.length).to.equal(1);
+				Code.expect(result.from(string).stack.length).to.equal(length - begin);
+				Code.expect(result.from(string, 1).stack.length).to.equal(1);
 
 				done();
 			});
 
 			lab.test('RegExp', function(done) {
-				Code.expect(result.from(pattern).trace.length).to.equal(length - begin);
-				Code.expect(result.from(pattern, 1).trace.length).to.equal(1);
+				Code.expect(result.from(pattern).stack.length).to.equal(length - begin);
+				Code.expect(result.from(pattern, 1).stack.length).to.equal(1);
 
 				done();
 			});
@@ -116,15 +116,15 @@ lab.experiment('Result Manipulation', function() {
 
 		lab.experiment('Before', function() {
 			lab.test('String', function(done) {
-				Code.expect(result.before(string).trace.length).to.equal(begin);
-				Code.expect(result.before(string, 1).trace.length).to.equal(1);
+				Code.expect(result.before(string).stack.length).to.equal(begin);
+				Code.expect(result.before(string, 1).stack.length).to.equal(1);
 
 				done();
 			});
 
 			lab.test('RegExp', function(done) {
-				Code.expect(result.before(pattern).trace.length).to.equal(begin);
-				Code.expect(result.before(pattern, 1).trace.length).to.equal(1);
+				Code.expect(result.before(pattern).stack.length).to.equal(begin);
+				Code.expect(result.before(pattern, 1).stack.length).to.equal(1);
 
 				done();
 			});
@@ -139,15 +139,15 @@ lab.experiment('Result Manipulation', function() {
 
 		lab.experiment('Until', function() {
 			lab.test('String', function(done) {
-				Code.expect(result.until(string).trace.length).to.equal(end + 1);
-				Code.expect(result.until(string, 1).trace.length).to.equal(1);
+				Code.expect(result.until(string).stack.length).to.equal(end + 1);
+				Code.expect(result.until(string, 1).stack.length).to.equal(1);
 
 				done();
 			});
 
 			lab.test('RegExp', function(done) {
-				Code.expect(result.until(pattern).trace.length).to.equal(end + 1);
-				Code.expect(result.until(pattern, 1).trace.length).to.equal(1);
+				Code.expect(result.until(pattern).stack.length).to.equal(end + 1);
+				Code.expect(result.until(pattern, 1).stack.length).to.equal(1);
 
 				done();
 			});
@@ -161,15 +161,15 @@ lab.experiment('Result Manipulation', function() {
 		});
 
 		lab.test('First', function(done) {
-			Code.expect(result.first().trace.length).to.equal(1);
-			Code.expect(result.first(5).trace.length).to.equal(5);
+			Code.expect(result.first().stack.length).to.equal(1);
+			Code.expect(result.first(5).stack.length).to.equal(5);
 
 			done();
 		});
 
 		lab.test('Last', function(done) {
-			Code.expect(result.last().trace.length).to.equal(1);
-			Code.expect(result.last(5).trace.length).to.equal(5);
+			Code.expect(result.last().stack.length).to.equal(1);
+			Code.expect(result.last(5).stack.length).to.equal(5);
 
 			done();
 		});
@@ -177,8 +177,8 @@ lab.experiment('Result Manipulation', function() {
 		lab.test('Only matching items', function(done) {
 			var only = result.from(string).until(pattern);
 
-			Code.expect(only.trace.length).to.equal(end - (begin - 1));
-			only.trace.forEach(function(item) {
+			Code.expect(only.stack.length).to.equal(end - (begin - 1));
+			only.stack.forEach(function(item) {
 				Code.expect(pattern.test(item.call)).to.equal(true);
 			});
 
@@ -189,7 +189,7 @@ lab.experiment('Result Manipulation', function() {
 			var still = result.after('anonymous'),
 				exist = false;
 
-			still.trace.forEach(function(item) {
+			still.stack.forEach(function(item) {
 				if (item.call && item.call.indexOf('anonymous') >= 0)
 					exist = true;
 			});
@@ -203,15 +203,15 @@ lab.experiment('Result Manipulation', function() {
 			var first = result.first(),
 				last = result.last();
 
-			Code.expect(first.item()).to.equal(result.trace[0]);
-			Code.expect(result.item(0)).to.equal(first.trace[0]);
+			Code.expect(first.item()).to.equal(result.stack[0]);
+			Code.expect(result.item(0)).to.equal(first.stack[0]);
 
-			Code.expect(result.item(3)).to.equal(result.trace[3]);
+			Code.expect(result.item(3)).to.equal(result.stack[3]);
 
-			Code.expect(last.item(true)).to.equal(result.trace[result.trace.length - 1]);
+			Code.expect(last.item(true)).to.equal(result.stack[result.stack.length - 1]);
 
 			Code.expect(last.item(-1)).to.equal(null);
-			Code.expect(last.item(result.trace.length)).to.equal(null);
+			Code.expect(last.item(result.stack.length)).to.equal(null);
 
 			done();
 		});
@@ -252,7 +252,7 @@ lab.experiment('Result Manipulation', function() {
 
 		lab.experiment('Context', function() {
 			lab.test('Result', function(done) {
-				var template = '{@message:Message: {message}@}{%trace:\n{@call:{call} [@}{file} @{line}:{column}{@call:]@}\n{context}\n%}',
+				var template = '{@message:Message: {message}@}{%stack:\n{@call:{call} [@}{file} @{line}:{column}{@call:]@}\n{context}\n%}',
 				output = result.filter('LabExperiment.experiment.start').toString(template);
 
 				Code.expect(output).to.match(/return experiment\.a\(callback\);/);
@@ -265,7 +265,7 @@ lab.experiment('Result Manipulation', function() {
 				var template = '{@call:{call} [@}{file} @{line}:{column}{@call:]@}\n{context}',
 					output = result.item().toString(template);
 
-				Code.expect(output).to.match(/var result = blame\.trace\(\),/);
+				Code.expect(output).to.match(/var result = blame\.stack\(\),/);
 				Code.expect(output).to.match(/\s+\^/);
 
 				done();

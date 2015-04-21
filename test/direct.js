@@ -8,11 +8,31 @@ var Code = require('code'),
 
 lab.experiment('Direct', function() {
 
+	lab.test('.trace() is deprecated', function(done) {
+		var old = console.log,
+			message;
+
+		console.error = function(input) {
+			message = input;
+		};
+
+		Code.expect(blame.trace('No more trace').message).to.equal('No more trace');
+		Code.expect(message).to.equal('blame.trace is deprecated: use blame.stack instead');
+
+		Code.expect(typeof blame.trace('No more trace').trace).to.equal('object');
+		Code.expect(blame.trace('No more trace').trace instanceof Array).to.equal(true);
+		Code.expect(message).to.equal('.trace is deprecated: use .stack instead');
+
+		console.error = old;
+
+		done();
+	});
+
 	lab.test('No argument', function(done) {
 		fs.readFile(module.filename, 'utf-8', function(error, data) {
 			var content = data.toString().split(/\n/),
-				result = blame.trace(),
-				item = result.trace[0];
+				result = blame.stack(),
+				item = result.stack[0];
 
 			//  there should be an empty string as message
 			Code.expect(result.message).to.equal('');
@@ -20,8 +40,8 @@ lab.experiment('Direct', function() {
 			//  the item should refer to the current file
 			Code.expect(item.file).to.equal(module.filename);
 
-			//  the line on which the blame.trace was invoked should match
-			Code.expect(content[item.line - 1]).to.match(/result = blame\.trace\(\)/);
+			//  the line on which the blame.stack was invoked should match
+			Code.expect(content[item.line - 1]).to.match(/result = blame\.stack\(\)/);
 
 			//  call should be null
 			Code.expect(item.call).to.equal(null);
@@ -33,8 +53,8 @@ lab.experiment('Direct', function() {
 	lab.test('String argument', function(done) {
 		fs.readFile(module.filename, 'utf-8', function(error, data) {
 			var content = data.toString().split(/\n/),
-				result = blame.trace('String Invocation'),
-				item = result.trace[0];
+				result = blame.stack('String Invocation'),
+				item = result.stack[0];
 
 			//  the result message should read 'String Invocation'
 			Code.expect(result.message).to.equal('String Invocation');
@@ -42,8 +62,8 @@ lab.experiment('Direct', function() {
 			//  the item should refer to the current file
 			Code.expect(item.file).to.equal(module.filename);
 
-			//  the line on which the blame.trace was invoked should match
-			Code.expect(content[item.line - 1]).to.match(/result = blame\.trace\('String Invocation'\)/);
+			//  the line on which the blame.stack was invoked should match
+			Code.expect(content[item.line - 1]).to.match(/result = blame\.stack\('String Invocation'\)/);
 
 			//  call should be null
 			Code.expect(item.call).to.equal(null);
@@ -55,8 +75,8 @@ lab.experiment('Direct', function() {
 	lab.test('Error argument', function(done) {
 		fs.readFile(module.filename, 'utf-8', function(error, data) {
 			var content = data.toString().split(/\n/),
-				result = blame.trace(new Error('Error Invocation')),
-				item = result.trace[0];
+				result = blame.stack(new Error('Error Invocation')),
+				item = result.stack[0];
 
 			//  the result message should read 'Error Invocation'
 			Code.expect(result.message).to.equal('Error Invocation');
@@ -64,8 +84,8 @@ lab.experiment('Direct', function() {
 			//  the item should refer to the current file
 			Code.expect(item.file).to.equal(module.filename);
 
-			//  the line on which the blame.trace was invoked should match
-			Code.expect(content[item.line - 1]).to.match(/result = blame\.trace\(new Error\('Error Invocation'\)\)/);
+			//  the line on which the blame.stack was invoked should match
+			Code.expect(content[item.line - 1]).to.match(/result = blame\.stack\(new Error\('Error Invocation'\)\)/);
 
 			//  call should be null
 			Code.expect(item.call).to.equal(null);
@@ -77,8 +97,8 @@ lab.experiment('Direct', function() {
 	lab.test('Boolean argument', function(done) {
 		fs.readFile(module.filename, 'utf-8', function(error, data) {
 			var content = data.toString().split(/\n/),
-				result = blame.trace(true),
-				item = result.trace[0];
+				result = blame.stack(true),
+				item = result.stack[0];
 
 			//  the result message should read 'true'
 			Code.expect(result.message).to.equal('true');
@@ -86,8 +106,8 @@ lab.experiment('Direct', function() {
 			//  the item should refer to the current file
 			Code.expect(item.file).to.equal(module.filename);
 
-			//  the line on which the blame.trace was invoked should match
-			Code.expect(content[item.line - 1]).to.match(/result = blame\.trace\(true\)/);
+			//  the line on which the blame.stack was invoked should match
+			Code.expect(content[item.line - 1]).to.match(/result = blame\.stack\(true\)/);
 
 			//  call should be null
 			Code.expect(item.call).to.equal(null);
@@ -99,8 +119,8 @@ lab.experiment('Direct', function() {
 	lab.test('Numeric argument', function(done) {
 		fs.readFile(module.filename, 'utf-8', function(error, data) {
 			var content = data.toString().split(/\n/),
-				result = blame.trace(1000),
-				item = result.trace[0];
+				result = blame.stack(1000),
+				item = result.stack[0];
 
 			//  the result message should read '1000'
 			Code.expect(result.message).to.equal('1000');
@@ -109,8 +129,8 @@ lab.experiment('Direct', function() {
 			//  the item should refer to the current file
 			Code.expect(item.file).to.equal(module.filename);
 
-			//  the line on which the blame.trace was invoked should match
-			Code.expect(content[item.line - 1]).to.match(/result = blame\.trace\(1000\)/);
+			//  the line on which the blame.stack was invoked should match
+			Code.expect(content[item.line - 1]).to.match(/result = blame\.stack\(1000\)/);
 
 			//  call should be null
 			Code.expect(item.call).to.equal(null);
