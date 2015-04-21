@@ -124,6 +124,8 @@ or
 	<call> [<file> @<line>:<column>]
 ```
 
+If you would like to add some flair to the stack traces, all of the templates used are fully customizable, please refer to the [templating tutorial](docs/templating.md) and the [templating example](example/template.js).
+
 
 ### `BlameItem`
 #### `.context([before [, after]])` (`string`)
