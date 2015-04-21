@@ -226,7 +226,7 @@ lab.experiment('Result Manipulation', function() {
 			lab.test('Result', function(done) {
 				//  expectation = <tab><asterisk>LabExperiment.experiment ... [... @<num>:<num>]
 				var output = String(result.from(string).until(string)).split(/\n+/),
-					expectation = new RegExp('\t\* ' + string + '.*?\[.*? @[0-9]+:[0-9]+\]');
+					expectation = new RegExp('\t\\* ' + string + '.*?\\[.*? @[0-9]+:[0-9]+\\]');
 
 				//  as each result reduction will actually leave the Message intact, we need to validate it first
 				//  (and remove it from the mass-expectation below)
@@ -250,7 +250,7 @@ lab.experiment('Result Manipulation', function() {
 
 				//  we expect a 'call' item
 				//  start with the specified call (the string variant)
-				Code.expect(String(result.until(pattern).item(true))).to.match(new RegExp('^\\s*' + string + '.*?\s+\[\/.*? @[0-9]+:[0-9]+\]$'));
+				Code.expect(String(result.until(pattern).item(true))).to.match(new RegExp('^\\s*' + string + '.*?\\s+\\[\/.*? @[0-9]+:[0-9]+\\]$'));
 
 				done();
 			});

@@ -4,7 +4,7 @@
 
 	//  Enforcing options
 
-	"curly"         : false,    // Require {} for every new block or scope.
+	"curly"         : true,     // Require {} for every new block or scope.
 	"eqeqeq"        : true,     // Require triple equals i.e. `===`.
 	"forin"         : false,    // Tolerate `for in` loops without `hasOwnPrototype`.
 	"immed"         : true,     // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
@@ -18,7 +18,8 @@
 	"undef"         : true,     // Require all non-global variables be declared before they are used.
 	"strict"        : true,     // Require `use strict` pragma in every file.
 	"trailing"      : true,     // Prohibit trailing whitespaces.
-
+	"maxcomplexity" : 6,        // The maximum level of code complexity
+//	"maxstatements" : 10,       // Set the max number of statements allowed per function
 
 	//  Relaxing options
 
@@ -47,7 +48,6 @@
 	"sub"           : false,    // Tolerate all forms of subscript notation besides dot notation e.g. `dict['key']` instead of `dict.key`.
 	"supernew"      : false,    // Tolerate `new function () { ... };` and `new Object;`.
 	"validthis"     : false,    // Tolerate strict violations when the code is running in strict mode and you use this in a non-constructor function.
-	"maxcomplexity" : 7,        // The maximum level of code complexity
 
 
 	//  Environment settings
@@ -72,6 +72,10 @@
 	"passfail"      : false,    // Stop on first error.
 	"white"         : true,     // Check against strict whitespace and indentation rules.
 
+
+	//  Deprecated
+	"camelcase"     : true,     // Enforce all variable names to use either camelCase style or UPPER_CASE with underscores.
+	"maxlen"        : 200,      // Enforce the maximum length of a line
 
 	//  Undocumented
 	// [4]: http://www.jshint.com/options/
