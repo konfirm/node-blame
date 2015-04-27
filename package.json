@@ -30,5 +30,8 @@
   },
   "engines": {
     "node": ">=0.10"
+  },
+  "dependencies": {
+    "polymorphic": "^1.0.0"
   }
 }

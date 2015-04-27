@@ -313,6 +313,27 @@ lab.experiment('Result Manipulation', function() {
 
 					done();
 				});
+
+				lab.test('Context template', function(done) {
+					var item = result.item(),
+						template = '{%lines:\n{line} |>>> {source}%}',
+						lines, before, after;
+
+					//  checking the default values
+					Code.expect(item.context(template)).to.equal(item.context(template, 3));
+					Code.expect(item.context(template)).to.equal(item.context(template, 3, 3));
+
+					//  checking the amount of lines in the source excerpt
+					for (after = 10; after > 0; --after) {
+						for (before = 10; before > 0; --before) {
+							lines = item.context(template, before, after).split('\n').filter(lineNumber);
+
+							Code.expect(lines.length).to.equal(before + after + 1);
+						}
+					}
+
+					done();
+				});
 			});
 		});
 	});
