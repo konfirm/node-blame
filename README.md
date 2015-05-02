@@ -1,6 +1,8 @@
 [![npm version](https://badge.fury.io/js/blame.svg)](http://badge.fury.io/js/blame)
 [![travis ci](https://api.travis-ci.org/konfirm/node-blame.svg)](https://travis-ci.org/konfirm/node-blame)
 [![Coverage Status](https://coveralls.io/repos/konfirm/node-blame/badge.svg)](https://coveralls.io/r/konfirm/node-blame)
+[![dependencies](https://david-dm.org/konfirm/node-blame.svg)](https://david-dm.org/konfirm/node-blame#info=dependencies)
+[![dev-dependencies](https://david-dm.org/konfirm/node-blame/dev-status.svg)](https://david-dm.org/konfirm/node-blame#info=devDependencies)
 [![Codacy Badge](https://www.codacy.com/project/badge/a5861841f2ad4b70af6e72273f08064c)](https://www.codacy.com/app/rogier/node-blame)
 
 # node-blame
