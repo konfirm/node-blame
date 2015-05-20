@@ -4,6 +4,7 @@
   "description": "Easy stack-traces (and find the file/line(/call) to blame)",
   "main": "lib/blame/index.js",
   "scripts": {
+    "posttest": "./node_modules/.bin/nsp audit-package",
     "test": "./node_modules/.bin/lab -f -t 100 -m 3000",
     "test-coverage": "./node_modules/.bin/lab -f -r html -m 3000 -o report.html"
   },
@@ -26,12 +27,13 @@
   "devDependencies": {
     "code": "^1.4.0",
     "coveralls": "^2.11.2",
-    "lab": "^5.5.1"
+    "lab": "^5.9.0",
+    "nsp": "^1.0.1"
   },
   "engines": {
     "node": ">=0.10"
   },
   "dependencies": {
-    "polymorphic": "^1.0.0"
+    "polymorphic": "^1.2.5"
   }
 }
