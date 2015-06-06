@@ -34,6 +34,6 @@
     "node": ">=0.10"
   },
   "dependencies": {
-    "polymorphic": "^1.2.5"
+    "polymorphic": "^1.2.7"
   }
 }

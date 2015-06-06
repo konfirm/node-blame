@@ -140,4 +140,4 @@ Provide a excerpt from the file with a simple pointer to the line which was resp
 
 
 ## License
-GPLv2 © [Konfirm](https://konfirm.eu)
+GPLv2 © [Konfirm ![Open](https://kon.fm/open.svg)](//kon.fm/site)
