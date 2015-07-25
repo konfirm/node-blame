@@ -25,15 +25,15 @@
   },
   "homepage": "https://github.com/konfirm/node-blame",
   "devDependencies": {
-    "code": "^1.4.0",
-    "coveralls": "^2.11.2",
-    "lab": "^5.9.0",
-    "nsp": "^1.0.1"
+    "code": "^1.4.1",
+    "coveralls": "^2.11.3",
+    "lab": "^5.13.0",
+    "nsp": "^1.0.3"
   },
   "engines": {
     "node": ">=0.10"
   },
   "dependencies": {
-    "polymorphic": "^1.2.7"
+    "polymorphic": "^1.2.8"
   }
 }
