@@ -259,7 +259,7 @@ lab.experiment('Result Manipulation', function() {
 		lab.experiment('Context', function() {
 			lab.test('Result', function(done) {
 				var template = '{@message:Message: {message}@}{%stack:\n{@call:{call} [@}{file} @{line}:{column}{@call:]@}\n{context}\n%}',
-				output = result.filter('LabExperiment.experiment.start').toString(template);
+					output = result.filter('LabExperiment.experiment.start').toString(template);
 
 				Code.expect(output).to.match(/return experiment\.a\(callback\);/);
 				Code.expect(output).to.match(/\s+\^/);
