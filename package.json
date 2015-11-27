@@ -33,7 +33,7 @@
     "nsp": "^2.0.2"
   },
   "engines": {
-    "node": ">=0.10"
+    "node": ">=4"
   },
   "dependencies": {
     "polymorphic": "^1.2.8"
