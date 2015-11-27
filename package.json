@@ -4,7 +4,7 @@
   "description": "Easy stack-traces (and find the file/line(/call) to blame)",
   "main": "lib/blame/index.js",
   "scripts": {
-    "posttest": "./node_modules/.bin/nsp audit-package",
+    "posttest": "./node_modules/.bin/nsp check",
     "test": "./node_modules/.bin/lab -f -t 100 -m 3000",
     "test-coverage": "./node_modules/.bin/lab -L -f -r html -m 3000 -o report.html"
   },
@@ -25,12 +25,12 @@
   },
   "homepage": "https://github.com/konfirm/node-blame",
   "devDependencies": {
-    "code": "^1.5.0",
+    "code": "^2.0.1",
     "coveralls": "^2.11.4",
     "eslint-config-hapi": "^3.0.1",
     "eslint-plugin-hapi": "^1.2.0",
-    "lab": "^6.2.0",
-    "nsp": "^1.1.0"
+    "lab": "^7.3.0",
+    "nsp": "^2.0.2"
   },
   "engines": {
     "node": ">=0.10"
