@@ -9,10 +9,16 @@
 Easy stack traces
 
 ## Install
-
 ```
 $ npm install --save blame
 ```
+
+As of version 2.0.0 `Blame` (mostly its dependencies) requires NodeJS 4 or higher. If you are 'stuck' on NodeJS 0.10 - 0.12, you will need to specify the version (the latest in the v1 range is 1.5.9).
+```
+$ npm install --save blame@^1.5.9
+```
+
+
 
 ## Usage
 ```js
