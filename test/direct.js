@@ -6,26 +6,48 @@ var Code = require('code'),
 	blame = require('../lib/blame'),
 	lab = exports.lab = Lab.script();
 
+function interceptDeprecation(done) {
+	var version = process.version.match(/^v([0-9]+)/),
+		original;
+
+	//  as of node 6 any deprecation message is send through process.emitWarning instead
+	//  of written to console.error
+	if (version && +version[1] >= 6) {
+		process.once('warning', function(warning) {
+			done(warning.message);
+		});
+	}
+	else {
+		original = console.error.bind(console);
+		console.error = function(warning) {
+			console.error = original;
+
+			setImmediate(function() {
+				done(warning);
+			});
+		};
+	}
+}
+
 lab.experiment('Direct', function() {
-
 	lab.test('.trace() is deprecated', function(done) {
-		var old = console.error,
-			message;
+		var output;
 
-		console.error = function(input) {
-			message = input;
-		}.bind(console);
+		interceptDeprecation(function(warning) {
+			Code.expect(output.message).to.equal('No more trace');
+			Code.expect(warning).to.equal('blame.trace is deprecated: use blame.stack instead');
 
-		Code.expect(blame.trace('No more trace').message).to.equal('No more trace');
-		Code.expect(message).to.equal('blame.trace is deprecated: use blame.stack instead');
+			interceptDeprecation(function(warning) {
+				Code.expect(warning).to.equal('.trace is deprecated: use .stack instead');
+				Code.expect(output.trace instanceof Array).to.equal(true);
 
-		Code.expect(typeof blame.trace('No more trace').trace).to.equal('object');
-		Code.expect(blame.trace('No more trace').trace instanceof Array).to.equal(true);
-		Code.expect(message).to.equal('.trace is deprecated: use .stack instead');
+				done();
+			});
 
-		console.error = old;
+			Code.expect(typeof output.trace).to.equal('object');
+		});
 
-		done();
+		output = blame.trace('No more trace');
 	});
 
 	lab.test('No argument', function(done) {
