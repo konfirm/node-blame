@@ -9,12 +9,12 @@ var Code = require('code'),
 lab.experiment('Direct', function() {
 
 	lab.test('.trace() is deprecated', function(done) {
-		var old = console.log,
+		var old = console.error,
 			message;
 
 		console.error = function(input) {
 			message = input;
-		};
+		}.bind(console);
 
 		Code.expect(blame.trace('No more trace').message).to.equal('No more trace');
 		Code.expect(message).to.equal('blame.trace is deprecated: use blame.stack instead');
