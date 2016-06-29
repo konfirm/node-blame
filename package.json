@@ -1,6 +1,6 @@
 {
   "name": "blame",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Easy stack-traces (and find the file/line(/call) to blame)",
   "main": "lib/blame/index.js",
   "scripts": {
@@ -25,17 +25,17 @@
   },
   "homepage": "https://github.com/konfirm/node-blame",
   "devDependencies": {
-    "code": "^2.0.1",
-    "coveralls": "^2.11.4",
-    "eslint-config-hapi": "^3.0.1",
-    "eslint-plugin-hapi": "^1.2.0",
-    "lab": "^7.3.0",
-    "nsp": "^2.0.2"
+    "code": "^3.0.1",
+    "coveralls": "^2.11.9",
+    "eslint-config-hapi": "^9.1.0",
+    "eslint-plugin-hapi": "^4.0.0",
+    "lab": "^10.8.2",
+    "nsp": "^2.5.0"
   },
   "engines": {
     "node": ">=4"
   },
   "dependencies": {
-    "polymorphic": "^1.2.8"
+    "polymorphic": "^1.2.9"
   }
 }
