@@ -1,6 +1,6 @@
 {
   "name": "blame",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Easy stack-traces (and find the file/line(/call) to blame)",
   "main": "lib/blame/index.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "error",
     "trace",
     "backtrace",
-    "blame"
+    "blame",
+    "stack-traces"
   ],
   "author": "Rogier Spieker <rogier+npm@konfirm.eu>",
   "license": "GPL-2.0",
@@ -25,17 +26,17 @@
   },
   "homepage": "https://github.com/konfirm/node-blame",
   "devDependencies": {
-    "code": "^3.0.1",
-    "coveralls": "^2.11.9",
+    "code": "^4.0.0",
+    "coveralls": "^2.13.1",
     "eslint-config-hapi": "^10.0.0",
     "eslint-plugin-hapi": "^4.0.0",
-    "lab": "^11.0.1",
-    "nsp": "^2.5.0"
+    "lab": "^13.0.4",
+    "nsp": "^2.6.3"
   },
   "engines": {
     "node": ">=4"
   },
   "dependencies": {
-    "polymorphic": "^1.2.9"
+    "polymorphic": "^1.4.1"
   }
 }
